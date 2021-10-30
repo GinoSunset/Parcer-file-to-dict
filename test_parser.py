@@ -1,4 +1,5 @@
 import os
+import pytest
 from parser import parse_file
 
 
@@ -34,4 +35,5 @@ def test_result_file(path_to_example_file):
         "***@afrinic.net 20050205",
         "source": "AFRINIC",
     }
-    assert parsed_data == expected_data
+    assert expected_data in parsed_data
+    assert isinstance(parsed_data, list)
