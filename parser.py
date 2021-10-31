@@ -13,7 +13,7 @@ def open_parse_file(path: str) -> TextIOWrapper:
     file = None
     xopen = gzip.open if path.endswith(".gz") else open
     try:
-        file = xopen(path, "r")
+        file = xopen(path, "rt")
         yield file
     finally:
         if file:
