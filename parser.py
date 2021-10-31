@@ -1,16 +1,19 @@
 from contextlib import contextmanager
+import gzip
 from io import TextIOWrapper
-from collections import defaultdict
 import re
 
-key_value_string_re = re.compile(r"^\S.+:.*")
+key_value_string_re = re.compile(
+    r"^\S.+:.*"
+)  # does not start with a space character any characters separated by the ":" character
 
 
 @contextmanager
 def open_parse_file(path: str) -> TextIOWrapper:
     file = None
+    xopen = gzip.open if path.endswith(".gz") else open
     try:
-        file = open(path, "r")
+        file = xopen(path, "r")
         yield file
     finally:
         if file:
